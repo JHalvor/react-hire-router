@@ -6,6 +6,10 @@ import './App.css'
 export default function App() {
   const [hiredPeople, setHiredPeople] = useState([])
 
+  const handleHire = (person) => {
+    setHiredPeople([ ...hiredPeople, person ])
+  }
+
   return (
     <>
       <header>
@@ -20,6 +24,7 @@ export default function App() {
       </header>
       <Routes>
         <Route path="/" element={<Dashboard hiredPeople={hiredPeople} />} />
+        <Route path="/view/:id" element={<PersonProfile onHire={handleHire} />} />
       </Routes>
     </>
   )

@@ -13,13 +13,7 @@ function Dashboard(props) {
   const fetchPeople = async () => {
     const response = await fetch(peopleURL);
     const jsonData = await response.json();
-
-    jsonData.results.forEach(person => {
-      setPeople((people) => [ ...people, { 
-        id: people.length + 1, 
-        firstName: person.name.first, 
-        lastName: person.name.last } ])
-    })
+    setPeople(jsonData.results)
   }
 
   useEffect(() => {
@@ -37,9 +31,6 @@ function Dashboard(props) {
         <h2>Hired People</h2>
         <PeopleList people={hiredPeople} />
       </section>
-      <Routes>
-        <Route path="/view/:id" element={<PersonProfile people={people} />} />
-      </Routes>
     </main>
   )
 }
