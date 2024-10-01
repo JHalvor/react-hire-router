@@ -3,22 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import PeopleList from './components/PeopleList'
 import PersonProfile from '../PersonProfile';
 
-function Dashboard(props) {
-  const { hiredPeople } = props
-
-  const numberOfPeople = 5
-  const peopleURL = `https://randomuser.me/api/?results=${numberOfPeople}`
-  const [people, setPeople] = useState([])
-
-  const fetchPeople = async () => {
-    const response = await fetch(peopleURL);
-    const jsonData = await response.json();
-    setPeople(jsonData.results)
-  }
-
-  useEffect(() => {
-    fetchPeople()
-  }, []);
+function Dashboard({ people, hiredPeople, setHiredPeople }) {
+  
   
   console.log("people: ", people)
   return (
@@ -29,7 +15,7 @@ function Dashboard(props) {
       </section>
       <section>
         <h2>Hired People</h2>
-        <PeopleList people={hiredPeople} />
+        <PeopleList setPeople={setHiredPeople} people={hiredPeople} setHiredPeople={setHiredPeople} />
       </section>
     </main>
   )
